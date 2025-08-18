@@ -79,6 +79,22 @@ RUN opam init --yes --auto-setup && opam install --confirm-level=unsafe-yes --de
 # install ajv for CBOM validation
 RUN npm -g install ajv ajv-cli
 
+# install nvcc for building with OQS_USE_CUPQC=ON on x86_64
+RUN if [ "$ARCH" = "x86_64" ]; then \
+    apt-key del 7fa2af80 && \
+    wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/x86_64/cuda-keyring_1.1-1_all.deb && \
+    dpkg -i cuda-keyring_1.1-1_all.deb && \
+    apt-get update && \
+    apt-get install -y cuda-toolkit && \
+    echo PATH=/usr/local/cuda-12.6/bin${PATH:+:${PATH}} >> .bashrc && \
+    echo LD_LIBRARY_PATH=/usr/local/cuda-12.6/lib64 \
+         ${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}} >> .bashrc && \
+    wget https://developer.download.nvidia.com/compute/cupqc/redist/cupqc/cupqc-pkg-0.2.0.tar.gz && \
+    mkdir /cupqc && \
+    tar -xzvf cupqc-pkg-0.2.0.tar.gz -C /cupqc && \
+    echo cuPQC_DIR="/cupqc/cupqc/cupqc-pkg-0.2.0/cmake/" >> .bashrc; \
+    fi
+
 # set JAVA_HOME for liboqs-java builds
 ENV JAVA_HOME="/usr/lib/jvm/default-java"
 

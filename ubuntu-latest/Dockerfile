@@ -61,6 +61,7 @@ RUN DEBIAN_FRONTEND=noninteractive TZ=Europe/Zurich && \
                        python3-tabulate \
                        python3-jinja2 \
                        python3-requests \
+                       python3-venv \
                        zlib1g-dev \
                        maven \
                        valgrind \

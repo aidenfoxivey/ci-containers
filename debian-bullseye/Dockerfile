@@ -11,7 +11,7 @@ RUN dpkg --add-architecture arm64 && \
        autoconf automake git libssl-dev libtool make unzip wget zlib1g-dev \
        doxygen  \
        python3 python3-nose python3-rednose python3-pytest python3-pytest-xdist docker.io \
-       python3-psutil \
+       python3-psutil python3-requests \
        maven openjdk-11-jdk \
        gcc-arm-linux-gnueabi gcc-arm-linux-gnueabihf gcc-aarch64-linux-gnu qemu-user-static \
        libssl-dev:arm64

@@ -45,3 +45,21 @@ jobs:
           build-args: ARCH=amd64
           tags: openquantumsafe/ci-alpine-amd64:latest
           context: alpine
+
+  debian:
+    strategy:
+      matrix:
+        arch:
+          - amd64
+          - armhf
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Build ci-debian-bullseye-${{ matrix.arch }}:latest, do not push
+        uses: docker/build-push-action@v6
+        with:
+          push: false
+          build-args: ARCH=${{ matrix.arch }}
+          tags: openquantumsafe/ci-debian-bullseye-${{ matrix.arch }}:latest
+          context: debian-bullseye

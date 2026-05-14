@@ -31,8 +31,6 @@ RUN DEBIAN_FRONTEND=noninteractive TZ=Europe/Zurich && \
                        pkg-config \
                        python3 \
                        python3-git \
-                       python3-nose \
-                       python3-rednose \
                        python3-pytest \
                        python3-pytest-xdist \
                        python3-psutil \
